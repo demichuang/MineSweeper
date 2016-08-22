@@ -1,7 +1,5 @@
 <?php
 
-$iTime1 = microtime(true);
-
 $arr = array_fill(0, 50, array_fill(0, 60, 0));
 
 $count = 0;
@@ -68,7 +66,3 @@ foreach ($arr as $values) {
         $numN++;
     }
 }
-
-$iTime2 = microtime(true);
-echo "<br>";
-echo $iTime2 - $iTime1;
