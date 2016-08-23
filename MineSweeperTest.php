@@ -1,27 +1,29 @@
 <?php
+$iTime1 = microtime(true);
 
-$arr = array ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+$arr = array_fill(0, 10, array_fill(0, 10, 0));
 
-$count = 0;
+$count = array_rand(range(0, 99), 40);
 
-while ($count < 40) {
-    $x = rand(0,9);
-    $y = rand(0,9);
+for ($i = 0; $i < 40; $i++) {
+    $x = (int)($count[$i] / 10);
+    $y = $count[$i] % 10;
 
     if ($arr[$x][$y] == "0") {
         $arr[$x][$y] = "M";
-        $count++;
+        // $count++;
     }
 }
+
+// while ($count < 40) {
+//     $x = rand(0,9);
+//     $y = rand(0,9);
+
+//     if ($arr[$x][$y] == "0") {
+//         $arr[$x][$y] = "M";
+//         $count++;
+//     }
+// }
 
 for ($i = 0; $i < 10; $i++) {
     for ($j = 0; $j < 10; $j++) {
@@ -95,5 +97,7 @@ foreach ($arr as $values) {
     echo "</tr>";
 }
 echo "</table>";
-print_r($arr);
-var_dump($arr);
+// print_r($arr);
+// var_dump($arr);
+$iTime2 = microtime(true);
+echo $iTime2 - $iTime1;

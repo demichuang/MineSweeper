@@ -2,15 +2,14 @@
 
 $arr = array_fill(0, 50, array_fill(0, 60, 0));
 
-$count = 0;
+$count = array_rand(range(0, 2999), 1200);
 
-while ($count < 1200) {
-    $x = rand(0,49);
-    $y = rand(0,59);
+for($i = 0; $i < 1200; $i++){
+    $x = (int)($count[$i] / 60);
+    $y = $count[$i] % 60;
 
     if ($arr[$x][$y] == "0") {
         $arr[$x][$y] = "M";
-        $count++;
     }
 }
 
