@@ -53,12 +53,13 @@ foreach ($arr as $values) {
     }
 }
 
-if ($countN > 9) {
-    $msg .= "換行符號(N)數量有誤，現在換行符號數量:" . $countN . "。\n";
-}
-
-if ($arrLength > 110) {
-    $msg .= "圖型大小有誤，現為10*" . $countRow . "，應為10*10。\n";
+if ($arrLength > 109) {
+    if(substr($map, -1) == "N") {
+        $msg .= "換行符號(N)數量有誤，現在換行符號數量:" . $countN . "。\n";
+    }
+    else {
+        $msg .= "圖型大小有誤，現為10*" . $countRow . "，應為10*10。\n";
+    }
 }
 
 if ($countM != 40) {
