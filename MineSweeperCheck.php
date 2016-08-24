@@ -54,7 +54,7 @@ foreach ($arr as $values) {
 }
 
 if ($arrLength > 109) {
-    if(substr($map, -1) == "N") {
+    if($countN != 9) {
         $msg .= "換行符號(N)數量有誤，現在換行符號數量:" . $countN . "。\n";
     }
     else {
