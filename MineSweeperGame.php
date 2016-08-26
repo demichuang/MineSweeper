@@ -1,76 +1,65 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+<?php require_once("MineSweeperGameArray.php"); ?>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // 按到地雷
+        <?php
+        for ($i = 0; $i < 10; $i++) {
+          for ($j = 0; $j < 10; $j++) {?>
+            $("#<?php echo $i.$j ?>").click(
+
+                function () {
+                    if(document.getElementById('<?php echo $i.$j ?>').value === " ") {
+                        document.getElementById('<?php echo $i.$j ?>').value = '<?php echo $arr[$i][$j]?>';
+                    }
+
+                    <?php if ($arr[$i][$j] === "M") { ?>
+                        window.alert("You die! Game Over!");
+
+                        <?php
+                        for ($k = 0; $k < 10; $k++) {
+                          for ($t = 0; $t < 10; $t++) {
+                            if ($arr[$k][$t] === "M") { ?>
+                                document.getElementById('<?php echo $k.$t ?>').value = '<?php echo $arr[$k][$t]?>';
+
+                            <?php }?>
+
+                            document.getElementById("<?php echo $k.$t ?>").disabled = true;
+                        <?php
+                          }
+                        }
+                    } ?>
+                }
+            );
+        <?php
+          }
+        } ?>
+    });
+</script>
 </head>
 
 <body>
 
-<?php
-$arr = array_fill(0, 10, array_fill(0, 10, 0));
+<form action="MineSweeperGame.php">
 
-$count = array_rand(range(0, 99), 40);
-
-for($t = 0; $t < 40; $t++){
-    $x = floor($count[$t] / 10);
-    $y = $count[$t] % 10;
-
-    if ($arr[$x][$y] == "0") {
-        $arr[$x][$y] = "M";
-    }
-}
-
-for ($i = 0; $i < 10; $i++) {
-    for ($j = 0; $j < 10; $j++) {
-
-        if ($arr[$i][$j] === "M") {
-
-            if ($arr[$i-1][$j-1] !== "M" && $i-1 >= 0 && $j-1 >= 0) {
-                $arr[$i-1][$j-1] += 1;
-            }
-
-            if ($arr[$i-1][$j] !== "M" && $i-1 >= 0) {
-                $arr[$i-1][$j] += 1;
-            }
-
-            if ($arr[$i-1][$j+1] !== "M" && $i-1 >= 0 && $j+1 <= 9) {
-                $arr[$i-1][$j+1] += 1;
-            }
-
-            if ($arr[$i][$j-1] !== "M" && $j-1 >= 0) {
-                $arr[$i][$j-1] += 1;
-            }
-
-            if ($arr[$i][$j+1] !== "M" && $j+1 <= 9) {
-                $arr[$i][$j+1] += 1;
-            }
-
-            if ($arr[$i+1][$j-1] !== "M" && $i+1 <= 9 && $j-1 >= 0) {
-                $arr[$i+1][$j-1] += 1;
-            }
-
-            if ($arr[$i+1][$j] !== "M" && $i+1 <= 9) {
-                $arr[$i+1][$j] += 1;
-            }
-
-            if ($arr[$i+1][$j+1] !== "M" && $i+1 <= 9 && $j+1 <= 9) {
-                $arr[$i+1][$j+1] += 1;
-            }
+    <?php
+    for ($i = 0; $i < 10; $i++) {
+        for ($j = 0; $j < 10; $j++) {?>
+           <input type ='button' style='width: 50px;height: 50px' value=" " id='<?php echo $i.$j?>'/>
+    <?php
         }
-    }
-}
 
-foreach ($arr as $values) {
-    foreach ($values as $key) {
-        echo " <input type ='button' style='width: 50px;height: 50px' value = $key id='kk'/>";
-        // echo " <button type='button'style='WIDTH: 50px; HEIGHT: 50px' id='$i.$j'></button>";
+        echo '<br>';
     }
-    echo "<br>";
-}
-?>
+    ?>
 
-<form action="" method="put" onsubmit="return false;">
-    <input type ='submit' style='WIDTH: 80px; HEIGHT: 30px' value ="new game">
+    <input type ='submit' style='width: 80px; height: 30px' value ="new game">
 </form>
 </body>
 </html>
