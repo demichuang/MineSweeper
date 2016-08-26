@@ -8,7 +8,7 @@
 
     $(document).ready(function () {
 
-        // 按到地雷
+        // 按按鈕
         <?php
         for ($i = 0; $i < 10; $i++) {
           for ($j = 0; $j < 10; $j++) {?>
@@ -17,10 +17,12 @@
                 function () {
                     if(document.getElementById('<?php echo $i.$j ?>').value === " ") {
                         document.getElementById('<?php echo $i.$j ?>').value = '<?php echo $arr[$i][$j]?>';
+                        document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "#C2C2FF";
                     }
 
                     <?php if ($arr[$i][$j] === "M") { ?>
                         window.alert("You die! Game Over!");
+                        document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "#FFB326";
 
                         <?php
                         for ($k = 0; $k < 10; $k++) {
@@ -37,6 +39,10 @@
                     } ?>
                 }
             );
+
+            // $("#<?php echo $i.$j ?>").mousedown(function rightclick(event) {
+            //     document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "#FF1C1C";
+            // });
         <?php
           }
         } ?>
