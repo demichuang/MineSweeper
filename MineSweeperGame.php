@@ -40,9 +40,15 @@
                 }
             );
 
-            // $("#<?php echo $i.$j ?>").mousedown(function rightclick(event) {
-            //     document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "#FF1C1C";
-            // });
+            document.getElementById('<?php echo $i.$j ?>').oncontextmenu = function(oEvent) {
+                if (oEvent.button==2 && document.getElementById('<?php echo $i.$j ?>').value === " ") {
+                    window.event.returnValue=false;
+                    if (document.getElementById('<?php echo $i.$j ?>').style.backgroundColor != "red")
+                        document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "red";
+                    else
+                        document.getElementById('<?php echo $i.$j ?>').style.backgroundColor = "#E0E0E0";
+                }
+            }
         <?php
           }
         } ?>
@@ -57,7 +63,7 @@
     <?php
     for ($i = 0; $i < 10; $i++) {
         for ($j = 0; $j < 10; $j++) {?>
-           <input type ='button' style='width: 50px;height: 50px' value=" " id='<?php echo $i.$j?>'/>
+           <input type ='button' style='width: 50px;height: 50px' color = "#E0E0E0" value=" " id='<?php echo $i.$j?>'/>
     <?php
         }
 
